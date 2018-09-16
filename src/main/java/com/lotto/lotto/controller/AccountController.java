@@ -16,8 +16,12 @@ import java.util.Optional;
 @RestController
 public class AccountController {
 
-    @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired //Prefer auto wired at constructure for testing and coding
+    public AccountController(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @GetMapping("/account/{id}")
     public AccountResponse getById(@PathVariable int id) {
@@ -30,7 +34,7 @@ public class AccountController {
                     obj.getSalary()
             );
         }
-        throw new MyAccountNotFoundException(String.format("Account id=[%d] not found",id));
+        throw new MyAccountNotFoundException(String.format("Account id=[%d] not found", id));
         //return new AccountResponse("user","password",1000);
     }
 

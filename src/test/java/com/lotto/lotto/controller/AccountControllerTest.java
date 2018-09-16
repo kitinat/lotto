@@ -24,7 +24,7 @@ public class AccountControllerTest {
     public void getById() {
         ResponseEntity<AccountResponse> result = testRestTemplate.getForEntity("/account/1", AccountResponse.class);
         assertEquals(HttpStatus.OK,result.getStatusCode());
-        AccountResponse expected = new AccountResponse("user","password",1000);
+        AccountResponse expected = new AccountResponse("fakeuser","fakepassword",99999);
         assertEquals(expected,result.getBody());
     }
 }
