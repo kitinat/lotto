@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    94.1%
+    100%
   </span>
   <span class="absValue">
-    (16/ 17)
+    (18/ 18)
   </span>
 </td>
 </tr>
@@ -108,25 +108,26 @@
 <b class="fc"><i>34</i>&nbsp;                    obj.getSalary()</b>
 <i>35</i>&nbsp;            );
 <i>36</i>&nbsp;        }
-<b class="nc"><i>37</i>&nbsp;        throw new MyAccountNotFoundException(String.format(&quot;Account id=[%d] not found&quot;, id));</b>
+<b class="fc"><i>37</i>&nbsp;        throw new MyAccountNotFoundException(String.format(&quot;Account id=[%d] not found&quot;, id));</b>
 <i>38</i>&nbsp;        //return new AccountResponse(&quot;user&quot;,&quot;password&quot;,1000);
 <i>39</i>&nbsp;    }
 <i>40</i>&nbsp;
 <i>41</i>&nbsp;    @PostConstruct
 <i>42</i>&nbsp;    public void initData() {
 <b class="fc"><i>43</i>&nbsp;        Account account = new Account();</b>
-<b class="fc"><i>44</i>&nbsp;        account.setUserName(&quot;fakeuser&quot;);</b>
-<b class="fc"><i>45</i>&nbsp;        account.setPassword(&quot;fakepassword&quot;);</b>
-<b class="fc"><i>46</i>&nbsp;        account.setSalary(99999);</b>
-<b class="fc"><i>47</i>&nbsp;        accountRepository.save(account);</b>
-<b class="fc"><i>48</i>&nbsp;    }</b>
-<i>49</i>&nbsp;}
+<b class="fc"><i>44</i>&nbsp;        account.setId(1);</b>
+<b class="fc"><i>45</i>&nbsp;        account.setUserName(&quot;fakeuser&quot;);</b>
+<b class="fc"><i>46</i>&nbsp;        account.setPassword(&quot;fakepassword&quot;);</b>
+<b class="fc"><i>47</i>&nbsp;        account.setSalary(99999);</b>
+<b class="fc"><i>48</i>&nbsp;        accountRepository.save(account);</b>
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2018-09-16 11:35</div>
+    <div style="float:right;">generated on 2018-09-16 14:55</div>
 </div>
 </body>
 </html>

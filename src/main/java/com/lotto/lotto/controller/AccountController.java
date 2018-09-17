@@ -41,6 +41,7 @@ public class AccountController {
     @PostConstruct
     public void initData() {
         Account account = new Account();
+        account.setId(1);
         account.setUserName("fakeuser");
         account.setPassword("fakepassword");
         account.setSalary(99999);

@@ -9,6 +9,9 @@ public class ResponseException {
         this.message = message;
     }
 
+    public ResponseException() {
+    }
+
     public String getMessage() {
         return message;
     }

@@ -17,12 +17,6 @@ public class Account {
     public Account() {
     }
 
-    public Account(String userName, String password, int salary) {
-        this.userName = userName;
-        this.password = password;
-        this.salary = salary;
-    }
-
     public int getId() {
         return id;
     }

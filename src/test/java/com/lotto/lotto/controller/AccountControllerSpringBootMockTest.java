@@ -1,10 +1,13 @@
 package com.lotto.lotto.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lotto.lotto.category.IntegrationTest;
 import com.lotto.lotto.controller.response.AccountResponse;
 import com.lotto.lotto.model.Account;
 import com.lotto.lotto.repository.AccountRepository;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Category(IntegrationTest.class)
 public class AccountControllerSpringBootMockTest {
 
     @Autowired
@@ -36,9 +40,16 @@ public class AccountControllerSpringBootMockTest {
     @MockBean
     private AccountRepository accountRepository;
 
+
+    @Before
+    public void initial() {
+        JacksonTester.initFields(this, new ObjectMapper());
+    }
+
+
     @Test
     public void getById() throws Exception {
-        JacksonTester.initFields(this, new ObjectMapper());
+
 
         //Stub
         Account account = new Account();
@@ -51,9 +62,9 @@ public class AccountControllerSpringBootMockTest {
         MockHttpServletResponse response = mockMvc
                 .perform(get("/account/1").accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
-        assertEquals("Status should be 200",HttpStatus.OK.value(), response.getStatus());
+        assertEquals("Status should be 200", HttpStatus.OK.value(), response.getStatus());
 
         AccountResponse expected = new AccountResponse("user", "password", 1000);
-        assertEquals("Response JSON should be equal",jsonTester.write(expected).getJson(), response.getContentAsString());
+        assertEquals("Response JSON should be equal", jsonTester.write(expected).getJson(), response.getContentAsString());
     }
 }

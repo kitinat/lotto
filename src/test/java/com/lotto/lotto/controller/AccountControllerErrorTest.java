@@ -1,7 +1,8 @@
 package com.lotto.lotto.controller;
 
 import com.lotto.lotto.category.IntegrationTest;
-import com.lotto.lotto.controller.response.AccountResponse;
+import com.lotto.lotto.exception.MyAccountNotFoundException;
+import com.lotto.lotto.exception.ResponseException;
 import com.lotto.lotto.model.Account;
 import com.lotto.lotto.repository.AccountRepository;
 import org.junit.Test;
@@ -18,13 +19,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Category(IntegrationTest.class)
-public class AccountControllerTest2 {
+public class AccountControllerErrorTest {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -33,19 +35,20 @@ public class AccountControllerTest2 {
     private AccountRepository accountRepository;
 
     @Test
-    public void getById() {
-
-        //Stub
+    public void getByIdWithAccountNotFound() {
+        //init data
         Account account = new Account();
-        account.setUserName("user");
-        account.setPassword("password");
-        account.setSalary(1000);
-        given(accountRepository.findById(1))
-                .willReturn(Optional.of(account));
+        account.setId(2);
+        try {
+            accountRepository.delete(account);
+        } catch (Exception e) {
 
-        ResponseEntity<AccountResponse> result = testRestTemplate.getForEntity("/account/1", AccountResponse.class);
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-        AccountResponse expected = new AccountResponse("user", "password", 1000);
-        assertEquals(expected, result.getBody());
+        }
+
+        ResponseEntity<ResponseException> result = testRestTemplate.getForEntity("/account/2", ResponseException.class);
+        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+        assertEquals("Account id=[2] not found", result.getBody().getMessage());
+        assertNotNull(result.getBody().getDate());
     }
+
 }

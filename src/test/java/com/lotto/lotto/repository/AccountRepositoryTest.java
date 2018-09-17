@@ -1,7 +1,10 @@
 package com.lotto.lotto.repository;
 
+import com.lotto.lotto.category.SlicingTest;
+import com.lotto.lotto.category.UnitTest;
 import com.lotto.lotto.model.Account;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -11,6 +14,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Category(SlicingTest.class)
 public class AccountRepositoryTest {
 
     @Autowired
@@ -18,6 +22,8 @@ public class AccountRepositoryTest {
 
     @Test
     public void createNewAccount(){
+
+
         Account newAccount = new Account();
         newAccount.setUserName("Kitinat");
         newAccount.setPassword("P@ssw0rd");
